@@ -236,7 +236,7 @@
 						var CAslide = $(this).find('>div:last');
 						CAspine
 							.attr('style', '')
-							.removeClass('CAspine active next CAspine_' + (index + 1))
+							.removeClass('CAspine active next CAspine_' + repeatUpTo(5, (index + 1)))
 							.find('.CAspineNumber')
 							.remove()
 							.end()
@@ -334,7 +334,7 @@
 							CAspine.find('>div:first').remove();
 						}
 						// add unique id to each tab, add active corner
-						CAspine.wrapInner('<span class="CAspineTitle" />').addClass('CAspine').addClass('CAspine_' + (index + 1));
+						CAspine.wrapInner('<span class="CAspineTitle" />').addClass('CAspine').addClass('CAspine_' + repeatUpTo(5, (index + 1)));
 						if (startSlide > -1) {
 							if (index === startSlide) {CAspine.addClass('active')};
 							if (index === (startSlide + 1)) {CAspine.addClass('next')};
@@ -732,6 +732,12 @@
 		return methods;
 
 	};
+
+	function repeatUpTo(upTo, sequential) {
+		var number = sequential % upTo;
+		return number === 0 ? upTo : number;
+	}
+
 	$.fn.conventAccordion = function(method, param) {
 		var elem = this,
 			instance = elem.data('conventAccordion');
