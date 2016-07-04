@@ -23,6 +23,8 @@
 */
 (function ($) {
 
+	var defaultStyle;
+
 	var ConventAccordion = function (accordion, options) {
         this.$elem = $(accordion);
         var metadata = (this.$elem.data("options")) ? this.$elem.data("options") : {};
@@ -223,8 +225,8 @@
 
 					// remove generated styles, classes, data, events
 					accordion
-						.attr('style', '')
-						.removeClass('conventAccordion horizontal vertical rounded basic dark light stitch spineless wind')
+						.attr('style', defaultStyle)
+						.removeClass('conventAccordion horizontal vertical rounded basic color dark light stitch spineless wind')
 						.removeData('conventAccordion')
 						.off('.conventAccordion')
 						.find('li > :first-child')
@@ -733,6 +735,8 @@
 	$.fn.conventAccordion = function(method, param) {
 		var elem = this,
 			instance = elem.data('conventAccordion');
+		// Store default style to be recovered on destroy
+		defaultStyle = elem.attr('style');
 		// if creating a new instance
 		if (typeof method === 'object' || !method) {
 			return elem.each(function() {
